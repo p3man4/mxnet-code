@@ -5,9 +5,35 @@ import matplotlib.image as mpimg
 import numpy as np
 import cv2
 from sklearn import preprocessing
+import smt_process.read_component_db as read_component_db
+
+SEED=7
+
+def get_dataset():
+    images,labels = get_data()
+
+    # shuffle images and lables
+    np.random.seed(SEED)
+    assert len(images) == len(labels)
+    rand_index = np.arange(len(images))
+    np.random.shuffle(rand_index)
+   
+    rand_images = images[rand_index]
+    rand_labels = labels[rand_index]
+
+    train_size = int(len(rand_images) * 0.8)
+    test_size =  len(rand_images) - train_size
+
+    train_data = rand_images[:train_size]
+    train_label = rand_labels[:train_size]
+    test_data =  rand_images[train_size:]
+    test_label = rand_labels[train_size:]
+    
+    return train_data, train_label, test_data, test_label
+
 
 def get_smtdata():
-    image_root='/home/junwon/smt-data/images/images_bgr/'
+    data_root='/home/junwon/smt-data/images/images_bgr/'
 
     cls_id=0
     cls_id_table={}
@@ -28,19 +54,11 @@ def get_smtdata():
         cls_id = cls_id + 1
     
     X = np.asarray(data)
-    print X.shape
     #X = np.asarray(cv2.resize(x,(64,64)) for x in data)
-    print X[0]
     X = X.astype(np.float32)/(255.0/2) - 1.0
-    print X[0]
     num_img = X.shape[0]
 
     X = np.reshape(X,(num_img,3,64,64))
-    print X.shape
-    
-
-
-
 
    # img_list=[]
    # for image in os.listdir(image_root):
@@ -71,7 +89,8 @@ def get_mnist():
 def main():
 
  #   train_data,train_label,test_data,test_label = get_mnist()
-    train_data,train_label,test_data,test_label = get_smtdata()
+ #   train_data,train_label,test_data,test_label = get_smtdata()
+    train_data, train_label, test_data, test_label = get_dataset()
     data = mx.sym.var('data')
 
     batch_size = 10
