@@ -9,6 +9,8 @@ from datetime import datetime
 import os
 import skimage.transform
 import time
+import smt_process.read_component_db as read_component_db
+
 
 def make_dcgan_sym(ngf, ndf, nc, no_bias=True, fix_gamma=True, eps=1e-5 + 1e-12):
     BatchNorm = mx.sym.BatchNorm
@@ -200,6 +202,38 @@ def get_smtdata():
     #X_test = data
     #return X_train, X_test
 
+SEED=7
+
+def get_dataset(DC):
+    num_classes, images,labels = DC.load_k3d()
+
+    # convert NHWC to NCHW
+    if images.shape[3] == 3:
+        images = images.transpose([0,3,1,2])
+
+    # shuffle images and labeles
+    np.random.seed(SEED)
+    assert len(images) == len(labels)
+    rand_index = np.arange(len(images))
+    np.random.shuffle(rand_index)
+
+    rand_labels = labels[rand_index]
+    rand_images = images[rand_index]
+
+    train_size = int(len(rand_images) * 0.8)
+    test_size =  len(rand_images) - train_size
+    train_data = rand_images[:train_size]
+    train_label = rand_labels[:train_size]
+    test_data = rand_images[:train_size]
+    test_label = rand_labels[:train_size]
+    #test_data =  rand_images[train_size:]
+    #test_label = rand_labels[train_size:]
+    print "train_size:",len(train_data)
+    print "test_size:", len(test_data)
+    return num_classes, train_data, train_label, test_data, test_label
+
+
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
@@ -231,9 +265,33 @@ if __name__ == '__main__':
     elif dataset == 'imagenet':
         train_iter = ImagenetIter(imgnet_path, batch_size, (3, 64, 64))
     elif dataset == 'smtdata':
-        print("here")
-        X = get_smtdata()
-        train_iter = mx.io.NDArrayIter(X,batch_size=batch_size)
+        print("smtdata")
+        #X = get_smtdata()
+        #train_iter = mx.io.NDArrayIter(X,batch_size=batch_size)
+        parser = argparse.ArgumentParser(description=desc, formatter_class=argparse.RawTextHelpFormatter)
+        group = parser.add_argument_group()
+        group.add_argument("-p", "--k3dpath", default=os.path.expanduser("some file"), help="Path to the k3d file")
+        group.add_argument("-t", "--table", default="", help="Path to the mapping table")
+        group.add_argument("-g", "--gpu", default="", help="GPU?(True/False)")
+        args = parser.parse_args()
+
+        use_gpu = False
+        DC = data_class.DataClass()
+        
+        # set template path
+        if args.table != "":
+            if os.path.exists(os.path.expanduser(args.table)):
+                print "loading table"
+                DC.set_template_path(os.path.expanduser(args.table))
+        
+        # set k3d data path
+        if args.k3dpath != "":
+            if os.path.exists(os.path.expanduser(args.k3dpath)):
+                print "loading k3d files"
+                DC.set_data_path(os.path.expanduser(args.k3dpath))
+
+
+
 
     rand_iter = RandIter(batch_size, Z)
     label = mx.nd.zeros((batch_size,), ctx=ctx)

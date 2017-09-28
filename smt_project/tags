@@ -7,16 +7,24 @@
 CalAcc	mysave.py	/^def CalAcc(pred_prob, label):$/;"	f
 CalLoss	mysave.py	/^def CalLoss(pred_prob, label):$/;"	f
 DATA_PATH	test1.py	/^DATA_PATH='\/home\/junwon\/smt-data\/Train_All\/'$/;"	v
+DC	data_class.py	/^    DC = DataClass()$/;"	v	class:DataClass
+DC	dcgan-test.py	/^        DC = data_class.DataClass()$/;"	v
 DC	test1.py	/^DC = detect_class.ComponentDetector()$/;"	v
+DC	train_cnn.py	/^    DC = data_class.DataClass()$/;"	v
+DC	train_cnn_incre.py	/^    DC = data_class.DataClass()$/;"	v
+DataClass	data_class.py	/^class DataClass(object):$/;"	c
 IMAGE_ROOT	vae_smt_tf.py	/^IMAGE_ROOT='\/home\/junwon\/smt-data\/images\/SOD6'$/;"	v
 ImagenetIter	dcgan-test.py	/^class ImagenetIter(mx.io.DataIter):$/;"	c
 LogLossGrad	mysave.py	/^def LogLossGrad(alpha, label):$/;"	f
 RandIter	dcgan-test.py	/^class RandIter(mx.io.DataIter):$/;"	c
 RandIter	gan_example.py	/^class RandIter(mx.io.DataIter):$/;"	c
+SEED	alexnet_test.py	/^SEED=7$/;"	v
+SEED	dcgan-test.py	/^SEED=7$/;"	v
+SEED	train_cnn.py	/^SEED=7$/;"	v
+SEED	train_cnn_incre.py	/^SEED=7$/;"	v
 SGD	mysave.py	/^def SGD(weight, grad, lr=0.1, grad_norm=batch_size):$/;"	f
 Softmax	mysave.py	/^def Softmax(theta):$/;"	f
 VariationalAutoencoder	vae_smt_tf.py	/^class VariationalAutoencoder(object):$/;"	c
-X	dcgan-test.py	/^        X = get_smtdata()$/;"	v
 X	gan_example.py	/^X = X.astype(np.float32)\/(255.0\/2) - 1.0$/;"	v
 X	gan_example.py	/^X = X.reshape((70000, 1, 64, 64))$/;"	v
 X	gan_example.py	/^X = X.reshape((70000, 28, 28))$/;"	v
@@ -25,6 +33,7 @@ X	gan_example.py	/^X = np.asarray([cv2.resize(x, (64,64)) for x in X])$/;"	v
 X	gan_example.py	/^X = np.tile(X, (1, 3, 1, 1))$/;"	v
 Z	dcgan-test.py	/^    Z = 100$/;"	v
 Z	gan_example.py	/^Z = 100$/;"	v
+__init__	data_class.py	/^    def __init__(self):$/;"	m	class:DataClass
 __init__	dcgan-test.py	/^    def __init__(self, batch_size, ndim):$/;"	m	class:RandIter
 __init__	dcgan-test.py	/^    def __init__(self, path, batch_size, data_shape):$/;"	m	class:ImagenetIter
 __init__	gan_example.py	/^    def __init__(self, batch_size, ndim):$/;"	m	class:RandIter
@@ -43,6 +52,9 @@ alpha	mysave.py	/^alpha = Softmax(theta)$/;"	v
 arg_arrays	mysave.py	/^arg_arrays = [mx.nd.zeros(shape, ctx=dev) for shape in arg_shapes]$/;"	v
 arg_map	mysave.py	/^arg_map = dict(zip(arg_names, arg_arrays))$/;"	v
 arg_names	mysave.py	/^arg_names = fc2.list_arguments() # 'data' $/;"	v
+args	dcgan-test.py	/^        args = parser.parse_args()$/;"	v
+args	train_cnn.py	/^    args = parser.parse_args()$/;"	v
+args	train_cnn_incre.py	/^    args = parser.parse_args()$/;"	v
 arr	mysave.py	/^        arr = arg_map[name]$/;"	v
 batch	mysave.py	/^batch = val_iter.next()$/;"	v
 batch_end_callback	mnist_cnn.py	/^        batch_end_callback= mx.callback.Speedometer(batch_size,100),$/;"	v
@@ -80,6 +92,7 @@ data	mnist_mlp.py	/^data = mx.sym.var('data')$/;"	v
 data	mysave.py	/^data = batch.data[0]$/;"	v
 data	mysave.py	/^data = mx.symbol.Variable('data')$/;"	v
 data_grad	mysave.py	/^data_grad = grad_map["data"]$/;"	v
+data_path	data_class.py	/^    data_path="\/home\/swchoi\/smt-data\/Train_0818_extra"$/;"	v	class:DataClass
 data_shape	mysave.py	/^data_shape= (batch_size,3,image_dim,image_dim)$/;"	v
 dataset	dcgan-test.py	/^    dataset = 'smtdata'$/;"	v
 dbn2	gan_example.py	/^dbn2 = mx.sym.BatchNorm(d2, name='dbn2', fix_gamma=fix_gamma, eps=epsilon)$/;"	v
@@ -128,9 +141,13 @@ generate	vae_smt_tf.py	/^    def generate(self, z_mu=None):$/;"	m	class:Variatio
 generator	gan_example.py	/^generator = mx.mod.Module(symbol=generatorSymbol, data_names=('rand',), label_names=None, context=ctx)$/;"	v
 generatorSymbol	gan_example.py	/^generatorSymbol = mx.sym.Activation(g5, name='gact5', act_type='tanh')$/;"	v
 get_data	vae_smt_tf.py	/^def get_data():$/;"	f
-get_mnist	cnn_test.py	/^def get_mnist():$/;"	f
+get_dataset	alexnet_test.py	/^def get_dataset(img_resize):$/;"	f
+get_dataset	dcgan-test.py	/^def get_dataset(DC):$/;"	f
+get_dataset	train_cnn.py	/^def get_dataset(DC):$/;"	f
+get_dataset	train_cnn_incre.py	/^def get_dataset(DC):$/;"	f
+get_mnist	alexnet_test.py	/^def get_mnist():$/;"	f
 get_mnist	dcgan-test.py	/^def get_mnist():$/;"	f
-get_smtdata	cnn_test.py	/^def get_smtdata():$/;"	f
+get_smtdata	alexnet_test.py	/^def get_smtdata():$/;"	f
 get_smtdata	dcgan-test.py	/^def get_smtdata():$/;"	f
 getdata	dcgan-test.py	/^    def getdata(self):$/;"	m	class:ImagenetIter
 getdata	dcgan-test.py	/^    def getdata(self):$/;"	m	class:RandIter
@@ -139,9 +156,15 @@ grad	mysave.py	/^grad = LogLossGrad(alpha, label.asnumpy())$/;"	v
 gradD	gan_example.py	/^        gradD = [[grad.copyto(grad.context) for grad in grads] for grads in discriminator._exec_group.grad_arrays]$/;"	v
 grad_arrays	mysave.py	/^grad_arrays = [mx.nd.zeros(shape, ctx=dev) for shape in arg_shapes]$/;"	v
 grad_map	mysave.py	/^grad_map = dict(zip(arg_names, grad_arrays))$/;"	v
+group	dcgan-test.py	/^        group = parser.add_argument_group()$/;"	v
+group	train_cnn.py	/^    group = parser.add_argument_group()$/;"	v
+group	train_cnn_incre.py	/^    group = parser.add_argument_group()$/;"	v
 image_dim	mysave.py	/^image_dim=224$/;"	v
 image_iter	gan_example.py	/^image_iter = mx.io.NDArrayIter(X, batch_size=batch_size)$/;"	v
 image_root	test.py	/^image_root='\/home\/junwon\/smt-data\/images\/SOD6'$/;"	v
+img_resize	data_class.py	/^    img_resize=56$/;"	v	class:DataClass
+img_resize	train_cnn.py	/^    img_resize=56$/;"	v
+img_resize	train_cnn_incre.py	/^    img_resize=56$/;"	v
 imgnet_path	dcgan-test.py	/^    imgnet_path = '.\/train.rec'$/;"	v
 inputs_need_grad	dcgan-test.py	/^              inputs_need_grad=True)$/;"	v
 iter_next	dcgan-test.py	/^    def iter_next(self):$/;"	m	class:ImagenetIter
@@ -158,15 +181,18 @@ label	mysave.py	/^label = batch.label[0]$/;"	v
 label_shapes	dcgan-test.py	/^              label_shapes=[('label', (batch_size,))],$/;"	v
 lenet	mnist_cnn.py	/^lenet = mx.sym.SoftmaxOutput(data=fc2,name='softmax')$/;"	v
 lenet_model	mnist_cnn.py	/^lenet_model = mx.mod.Module(symbol=lenet,context = mx.cpu())$/;"	v
+load_k3d	data_class.py	/^    def load_k3d(self):$/;"	m	class:DataClass
 losGrad_theta	mysave.py	/^        losGrad_theta = LogLossGrad(alpha, label)$/;"	v
 lr	dcgan-test.py	/^    lr = 0.0002$/;"	v
 lr	gan_example.py	/^lr = 0.0002$/;"	v
 mACC	dcgan-test.py	/^    mACC = mx.metric.CustomMetric(facc)$/;"	v
 mD	dcgan-test.py	/^    mD = mx.metric.CustomMetric(fentropy)$/;"	v
 mG	dcgan-test.py	/^    mG = mx.metric.CustomMetric(fentropy)$/;"	v
-main	cnn_test.py	/^def main():$/;"	f
+main	alexnet_test.py	/^def main():$/;"	f
 main	test-convert-image.py	/^def main():$/;"	f
 main	test.py	/^def main():$/;"	f
+main	train_cnn.py	/^def main(DC,use_gpu):$/;"	f
+main	train_cnn_incre.py	/^def main(DC,use_gpu):$/;"	f
 main	vae_smt_tf.py	/^def main():$/;"	f
 make_dcgan_sym	dcgan-test.py	/^def make_dcgan_sym(ngf, ndf, nc, no_bias=True, fix_gamma=True, eps=1e-5 + 1e-12):$/;"	f
 mlp	mnist_mlp.py	/^mlp = mx.sym.SoftmaxOutput(data=fc3, name='softmax')$/;"	v
@@ -215,6 +241,9 @@ optimizer_params	mnist_mlp.py	/^        optimizer_params={'learning_rate':0.1},$
 outG	gan_example.py	/^        outG = generator.get_outputs()$/;"	v
 out_grad	mysave.py	/^out_grad = mx.nd.zeros(model.outputs[0].shape, ctx=dev)$/;"	v
 p	gan_example.py	/^p = np.random.permutation(mnist.data.shape[0])$/;"	v
+parser	dcgan-test.py	/^        parser = argparse.ArgumentParser(description=desc, formatter_class=argparse.RawTextHelpFormatter)$/;"	v
+parser	train_cnn.py	/^    parser = argparse.ArgumentParser(description=desc, formatter_class=argparse.RawTextHelpFormatter)$/;"	v
+parser	train_cnn_incre.py	/^    parser = argparse.ArgumentParser(description=desc, formatter_class=argparse.RawTextHelpFormatter)$/;"	v
 partial_fit	vae_smt_tf.py	/^    def partial_fit(self, X):$/;"	m	class:VariationalAutoencoder
 path_imgidx	mysave.py	/^        path_imgidx="\/home\/junwon\/mxnet_code\/smt_project\/data\/images-smt.idx")$/;"	v
 path_imgrec	mysave.py	/^        path_imgrec="\/home\/junwon\/mxnet_code\/smt_project\/data\/images-smt.rec",$/;"	v
@@ -232,6 +261,10 @@ rbatch	gan_example.py	/^        rbatch = rand_iter.next()$/;"	v
 reconstruct	vae_smt_tf.py	/^    def reconstruct(self, X):$/;"	m	class:VariationalAutoencoder
 reqs	mysave.py	/^reqs = ["write" for name in arg_names]$/;"	v
 reset	dcgan-test.py	/^    def reset(self):$/;"	m	class:ImagenetIter
+set_data_path	data_class.py	/^    def set_data_path(self,data_path):$/;"	m	class:DataClass
+set_img_resize	data_class.py	/^    def set_img_resize(self,img_resize):$/;"	m	class:DataClass
+set_template_path	data_class.py	/^    def set_template_path(self,template_path):$/;"	m	class:DataClass
+shallow_cnn	model_zoo.py	/^def shallow_cnn(data,num_classes):$/;"	f
 show	test.py	/^def show(data):$/;"	f
 show_image	vae_smt_tf.py	/^def show_image(data):$/;"	f
 sigma	gan_example.py	/^sigma = 0.02$/;"	v
@@ -244,6 +277,7 @@ tanh2	mysave.py	/^tanh2 = mx.symbol.Activation(data=conv2, act_type="tanh")$/;"	
 tanh3	mnist_cnn.py	/^tanh3 = mx.sym.Activation(data=fc1, act_type="tanh")$/;"	v
 tanh3	mysave.py	/^tanh3 = mx.symbol.Activation(data=fc1, act_type="tanh")$/;"	v
 tar	test2.py	/^tar = tarfile.open(fname)$/;"	v
+template_path	data_class.py	/^    template_path="\/home\/swchoi\/smt-project\/SMT-v2\/detect_part\/training_data\/Template2Part_Map.csv"$/;"	v	class:DataClass
 test_iter	mnist_cnn.py	/^test_iter = mx.io.NDArrayIter(mnist['test_data'], None, batch_size)$/;"	v
 test_iter	mnist_cnn.py	/^test_iter = mx.io.NDArrayIter(mnist['test_data'], mnist['test_label'], batch_size)$/;"	v
 test_iter	mnist_mlp.py	/^test_iter = mx.io.NDArrayIter(mnist['test_data'],mnist['test_label'],batch_size)$/;"	v
@@ -253,13 +287,17 @@ train	vae_smt_tf.py	/^def train(network_architecture, learning_rate=0.001,$/;"	f
 train_acc	mysave.py	/^    train_acc = 0.$/;"	v
 train_acc	mysave.py	/^train_acc = 0.$/;"	v
 train_iter	dcgan-test.py	/^        train_iter = ImagenetIter(imgnet_path, batch_size, (3, 64, 64))$/;"	v
-train_iter	dcgan-test.py	/^        train_iter = mx.io.NDArrayIter(X,batch_size=batch_size)$/;"	v
 train_iter	dcgan-test.py	/^        train_iter = mx.io.NDArrayIter(X_train, batch_size=batch_size)$/;"	v
 train_iter	mnist_cnn.py	/^train_iter = mx.io.NDArrayIter(mnist['train_data'], mnist['train_label'], batch_size, shuffle=True)$/;"	v
 train_iter	mnist_mlp.py	/^train_iter = mx.io.NDArrayIter(mnist['train_data'], mnist['train_label'], batch_size, shuffle=True)$/;"	v
 train_iter	mysave.py	/^train_iter = mx.image.ImageIter(batch_size=4,data_shape=(3,image_dim,image_dim),$/;"	v
 train_loss	mysave.py	/^    train_loss = 0.$/;"	v
 transform	vae_smt_tf.py	/^    def transform(self, X):$/;"	m	class:VariationalAutoencoder
+use_gpu	dcgan-test.py	/^        use_gpu = False$/;"	v
+use_gpu	train_cnn.py	/^        use_gpu = args.gpu$/;"	v
+use_gpu	train_cnn.py	/^    use_gpu=False$/;"	v
+use_gpu	train_cnn_incre.py	/^        use_gpu = args.gpu$/;"	v
+use_gpu	train_cnn_incre.py	/^    use_gpu=False$/;"	v
 vae	vae_smt_tf.py	/^vae = train(network_architecture, training_epochs=10)$/;"	v
 val_iter	mnist_cnn.py	/^val_iter = mx.io.NDArrayIter(mnist['test_data'], mnist['test_label'], batch_size)$/;"	v
 val_iter	mnist_mlp.py	/^val_iter = mx.io.NDArrayIter(mnist['test_data'], mnist['test_label'], batch_size)$/;"	v
